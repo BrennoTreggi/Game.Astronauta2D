@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CaracterPlayer : MonoBehaviour
 {
+    public float timekill = 5f;
     public bool destroi = false;
     public int StartLife = 10;
     private int CharacteristicsLife;
@@ -24,9 +25,9 @@ public class CaracterPlayer : MonoBehaviour
     {
         if (kill1) return;
 
-        StartLife -= Danege;
+        CharacteristicsLife -= Danege;
 
-        if (CharacteristicsLife > 0)
+        if (CharacteristicsLife <= 0)
         {
             Kill();
         }
@@ -38,7 +39,7 @@ public class CaracterPlayer : MonoBehaviour
         kill1 = true;
         if (destroi)
         {
-            Destroy(gameObject);
+            Destroy(gameObject, timekill);
         }
     }
 

@@ -8,15 +8,15 @@ public class EnymeCarater : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-
-
+    
         Debug.Log(collision.transform.name);
-        var Health = collision.gameObject.GetComponent<CaracterPlayer>();
 
-        if (Health != null)
+        var health = collision.gameObject.GetComponent<CaracterPlayer>();
+
+        if (health != null)
         {
-            Health.Danege(danege);
+            health.Danege(danege);
         }
 
     }
-}
+ }
