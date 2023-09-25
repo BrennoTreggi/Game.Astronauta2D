@@ -10,9 +10,13 @@ public class Player : MonoBehaviour
     public Vector2 friction = new Vector2(.1f, 0);
     public float Speed;
     public float ForceJump = 1.5f;
+   
+    [Header("Animator")]
+    public string tringgerplay = "Run";
+    public Animator animator;
+    public float animationDuration = .1f;
 
-
-    [Header("AniomationSetup")]
+    [Header("AniomationJump")]
     public float ScaleCollider = 0.7f;
     public float JumpScaleY = 1.5f;
     public float JumpScaleX = 0.7f;
@@ -30,23 +34,49 @@ public class Player : MonoBehaviour
     private void MyPlayer()
     {
         if (Input.GetKey(KeyCode.LeftShift))
-        
+        {
             Speedforce = Speedcaracter;
+            animator.speed = 2;
+        }
         else
-                Speedforce = Speed;
-        
+        {
+            Speedforce = Speed;
+            animator.speed = 1;
 
-       if (Input.GetKey(KeyCode.LeftArrow))
+        }
+
+
+
+        if (Input.GetKey(KeyCode.LeftArrow))
         {
             //myrygibody.MovePosition(myrygibody.position - velocitty * Time.deltaTime);
             myrygibody.velocity = new Vector2(-Speedforce, myrygibody.velocity.y);
+            if (myrygibody.transform.localScale.x != -1)
+            {
+                myrygibody.transform.DOScaleX(-1, animationDuration);
+            }
+            animator.SetBool(tringgerplay, true);
         }
         else if (Input.GetKey(KeyCode.RightArrow))
         {
             //myrygibody.MovePosition(myrygibody.position + velocitty * Time.deltaTime);
             myrygibody.velocity = new Vector2(+Speedforce, myrygibody.velocity.y);
+            if (myrygibody.transform.localScale.x != 1)
+            {
+                myrygibody.transform.DOScaleX(1, animationDuration);
+
+            }
+            myrygibody.transform.localScale = new Vector3 (1, 1, 1);
+            animator.SetBool(tringgerplay, true);
 
         }
+        else
+        {
+            animator.SetBool(tringgerplay, false);
+
+        }
+
+
         if (myrygibody.velocity.x > 0)
         {
             myrygibody.velocity -= friction; 
@@ -58,6 +88,7 @@ public class Player : MonoBehaviour
         }
 
     }
+  
 
     private void PlayerJump()
     { 
