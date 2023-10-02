@@ -1,20 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Script.Ultts.Singleton;
 
-public class ManegerItensGamer : MonoBehaviour
+public class ManegerItensGamer : Singleton<ManegerItensGamer>
 {
-    public static ManegerItensGamer Instance;
+    
     public int coins;
 
-   
-    private void Awake()
-    {
-        if (Instance == null)
-            Instance = this;
-        else
-            Destroy(gameObject);    
-    }
     private void Start()
     {
         Reset();
