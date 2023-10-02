@@ -10,10 +10,18 @@ public class CaracterPlayer : MonoBehaviour
     private int CharacteristicsLife;
     private bool kill1 = false;
 
+    [SerializeField] private FlashColor FlashColor;
 
     private void Awake()
     {
         PLay();
+
+        if (FlashColor == null) 
+        {
+        FlashColor = GetComponent<FlashColor>();
+        
+        }
+        
     }
     private void PLay()
     {
@@ -31,6 +39,14 @@ public class CaracterPlayer : MonoBehaviour
         {
             Kill();
         }
+
+        if(FlashColor != null) 
+        {
+            FlashColor.Flash();
+        
+        }
+
+
 
     }
 

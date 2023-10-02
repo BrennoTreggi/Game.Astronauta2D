@@ -6,6 +6,9 @@ public class EnymeCarater : MonoBehaviour
 {
     public int danege = 10;
 
+
+    public Animator animator;
+    public string AnimationEnemy = "Atack";
     private void OnCollisionEnter2D(Collision2D collision)
     {
     
@@ -16,7 +19,15 @@ public class EnymeCarater : MonoBehaviour
         if (health != null)
         {
             health.Danege(danege);
+            PlayAnimationAtackEnemy();
         }
 
     }
+
+    private void PlayAnimationAtackEnemy()
+    {
+
+        animator.SetTrigger(AnimationEnemy);
+    }
+
  }
