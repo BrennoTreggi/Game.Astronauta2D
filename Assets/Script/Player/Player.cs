@@ -5,16 +5,21 @@ using UnityEngine;
 using DG.Tweening;
 public class Player : MonoBehaviour
 {
+    public HealthBase HealthBase;
+
     [Header("SpeedeSetup")]
     public Rigidbody2D myrygibody;
     public Vector2 friction = new Vector2(.1f, 0);
     public float Speed;
+    public float speedRun;   
     public float ForceJump = 1.5f;
    
     [Header("Animator")]
     public string tringgerplay = "Run";
+    public string tringgerDetch = "Detch";
     public Animator animator;
     public float animationDuration = .1f;
+
 
     [Header("AniomationJump")]
     public float ScaleCollider = 0.7f;
@@ -24,6 +29,22 @@ public class Player : MonoBehaviour
     public Ease ease = Ease.OutBack;
     public float Speedcaracter;
     private float Speedforce;
+
+
+    private void Awake()
+    {
+       if (HealthBase != null)
+        {
+           HealthBase.Onkill += OnPlayer;
+            
+        }
+    }
+
+    private void OnPlayer()
+    {
+        HealthBase.Onkill -= OnPlayer;
+        animator.SetTrigger(tringgerDetch);
+    }
 
     private void Update()
     {
@@ -35,7 +56,7 @@ public class Player : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.LeftShift))
         {
-            Speedforce = Speedcaracter;
+            Speedforce = speedRun;
             animator.speed = 2;
         }
         else
@@ -108,4 +129,11 @@ public class Player : MonoBehaviour
         myrygibody.transform.DOScaleY(JumpScaleY, jumpduration).SetLoops(2, LoopType.Yoyo).SetEase(ease);
         myrygibody.transform.DOScaleX(JumpScaleX, jumpduration).SetLoops(2, LoopType.Yoyo).SetEase(ease);
     }
+
+    public void Destroylle()
+    {
+        Destroy(gameObject);
+    }
+
+
 }

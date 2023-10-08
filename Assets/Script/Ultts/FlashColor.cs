@@ -49,7 +49,8 @@ public class FlashColor : MonoBehaviour
         foreach (var s in SpriteRenderers)
         {
 
-           colorTween = s.DOColor(color, duration).SetLoops(2, LoopType.Yoyo); 
+          colorTween = s.DOColor(color, duration)
+                .SetLoops(2, LoopType.Yoyo);
         }
 
 

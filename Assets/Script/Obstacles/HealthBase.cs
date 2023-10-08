@@ -1,11 +1,13 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CaracterPlayer : MonoBehaviour
+public class HealthBase : MonoBehaviour
 {
+    public Action Onkill;
     public float timekill = 5f;
-    public bool destroi = false;
+    public bool destroy = false;
     public int StartLife = 10;
     private int CharacteristicsLife;
     private bool kill1 = false;
@@ -53,10 +55,11 @@ public class CaracterPlayer : MonoBehaviour
     private void Kill()
     {
         kill1 = true;
-        if (destroi)
+        if (destroy)
         {
             Destroy(gameObject, timekill);
         }
+        Onkill?.Invoke();
     }
 
 
