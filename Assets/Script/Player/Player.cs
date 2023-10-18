@@ -6,33 +6,21 @@ using DG.Tweening;
 public class Player : MonoBehaviour
 {
     public HealthBase HealthBase;
-
-    [Header("SpeedeSetup")]
     public Rigidbody2D myrygibody;
-    public Vector2 friction = new Vector2(.1f, 0);
-    public float Speed;
-    public float speedRun;   
-    public float ForceJump = 1.5f;
-   
-    [Header("Animator")]
-    public string tringgerplay = "Run";
-    public string tringgerDetch = "Detch";
-    public Animator animator;
-    public float animationDuration = .1f;
 
+    [Header("Setup")]
+    public SO_Player SO_Player;
 
-    [Header("AniomationJump")]
-    public float ScaleCollider = 0.7f;
-    public float JumpScaleY = 1.5f;
-    public float JumpScaleX = 0.7f;
-    public float jumpduration = .3f;
-    public Ease ease = Ease.OutBack;
+    //public Animator animator;
     public float Speedcaracter;
     private float Speedforce;
-
+    private Animator myAnimator;
 
     private void Awake()
     {
+       myAnimator = Instantiate(SO_Player.player, transform);
+
+
        if (HealthBase != null)
         {
            HealthBase.Onkill += OnPlayer;
@@ -43,7 +31,7 @@ public class Player : MonoBehaviour
     private void OnPlayer()
     {
         HealthBase.Onkill -= OnPlayer;
-        animator.SetTrigger(tringgerDetch);
+        myAnimator.SetTrigger(SO_Player.tringgerDetch);
     }
 
     private void Update()
@@ -56,13 +44,13 @@ public class Player : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.LeftShift))
         {
-            Speedforce = speedRun;
-            animator.speed = 2;
+            Speedforce = SO_Player.speedRun;
+            myAnimator.speed = 2;
         }
         else
         {
-            Speedforce = Speed;
-            animator.speed = 1;
+            Speedforce = SO_Player.Speed;
+            myAnimator.speed = 1;
 
         }
 
@@ -74,9 +62,9 @@ public class Player : MonoBehaviour
             myrygibody.velocity = new Vector2(-Speedforce, myrygibody.velocity.y);
             if (myrygibody.transform.localScale.x != -1)
             {
-                myrygibody.transform.DOScaleX(-1, animationDuration);
+                myrygibody.transform.DOScaleX(-1, SO_Player.animationDuration);
             }
-            animator.SetBool(tringgerplay, true);
+            myAnimator.SetBool(SO_Player.tringgerplay, true);
         }
         else if (Input.GetKey(KeyCode.RightArrow))
         {
@@ -84,27 +72,27 @@ public class Player : MonoBehaviour
             myrygibody.velocity = new Vector2(+Speedforce, myrygibody.velocity.y);
             if (myrygibody.transform.localScale.x != 1)
             {
-                myrygibody.transform.DOScaleX(1, animationDuration);
+                myrygibody.transform.DOScaleX(1, SO_Player.animationDuration);
 
             }
             myrygibody.transform.localScale = new Vector3 (1, 1, 1);
-            animator.SetBool(tringgerplay, true);
+            myAnimator.SetBool(SO_Player.tringgerplay, true);
 
         }
         else
         {
-            animator.SetBool(tringgerplay, false);
+            myAnimator.SetBool(SO_Player.tringgerplay, false);
 
         }
 
 
         if (myrygibody.velocity.x > 0)
         {
-            myrygibody.velocity -= friction; 
+            myrygibody.velocity -= SO_Player.friction; 
         }
         else if (myrygibody.velocity.x < 0)
         {
-            myrygibody.velocity += friction;
+            myrygibody.velocity += SO_Player.friction;
 
         }
 
@@ -115,7 +103,7 @@ public class Player : MonoBehaviour
     { 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            myrygibody.velocity = Vector2.up * ForceJump;
+            myrygibody.velocity = Vector2.up * SO_Player.ForceJump;
             myrygibody.transform.localScale = Vector2.one;
             DOTween.Kill(myrygibody.transform);
             DOTween.Kill(myrygibody.transform);
@@ -125,9 +113,9 @@ public class Player : MonoBehaviour
     }
     private void ScaleJump()
     {
-        myrygibody.transform.DOScaleX(JumpScaleX, ScaleCollider).SetLoops(1, LoopType.Restart).SetEase(ease);
-        myrygibody.transform.DOScaleY(JumpScaleY, jumpduration).SetLoops(2, LoopType.Yoyo).SetEase(ease);
-        myrygibody.transform.DOScaleX(JumpScaleX, jumpduration).SetLoops(2, LoopType.Yoyo).SetEase(ease);
+        myrygibody.transform.DOScaleX(SO_Player.JumpScaleX, SO_Player.jumpduration).SetLoops(1, LoopType.Restart).SetEase(SO_Player.ease);
+        myrygibody.transform.DOScaleY(SO_Player.JumpScaleY, SO_Player.jumpduration).SetLoops(2, LoopType.Yoyo).SetEase(SO_Player.ease);
+       // myrygibody.transform.DOScaleX(JumpScaleX, jumpduration).SetLoops(2, LoopType.Yoyo).SetEase(ease);
     }
 
     public void Destroylle()

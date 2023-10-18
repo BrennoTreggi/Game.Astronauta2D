@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e3ec67295b25494194aa99b821d1554, type: 3}
+  m_Name: SO_Player_01
+  m_EditorClassIdentifier: 
+  Name: {fileID: 11400000, guid: 0fd6aa40a95cf8840b4688126d87e7d4, type: 2}
+  player: {fileID: 6413013834153556191, guid: 00afc9fb4087652419d090da0b825d97, type: 3}
+  friction: {x: -0.01, y: 0}
+  Speed: 12
+  speedRun: 13
+  ForceJump: 25
+  ScaleCollider: 0.72
+  JumpScaleY: 1.03
+  JumpScaleX: 0.93
+  jumpduration: 0.06
+  ease: 27
+  tringgerplay: Run
+  tringgerDetch: Detch
+  animationDuration: 0.1

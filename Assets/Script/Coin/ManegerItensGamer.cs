@@ -7,7 +7,7 @@ using Script.Ultts.Singleton;
 public class ManegerItensGamer : Singleton<ManegerItensGamer>
 {
     
-    public int coins;
+    public SOinti coins;
     public TextMeshProUGUI TextMeshProUGUI;
 
     private void Start()
@@ -18,12 +18,12 @@ public class ManegerItensGamer : Singleton<ManegerItensGamer>
 
     public void Reset()
     {
-        coins = 0;
+        coins.valor = 0;
         UpdateUI();
     }
     public void AdsCoin(int amount = 1) 
     {
-        coins += amount;
+        coins.valor += amount;
         UpdateUI();
 
     }
@@ -31,7 +31,7 @@ public class ManegerItensGamer : Singleton<ManegerItensGamer>
     private void UpdateUI()
     {
         //TextMeshProUGUI.text = coins.ToString();
-        UIGameManeger.UpdateTextCoins(coins.ToString());
+       //UIGameManeger.UpdateTextCoins(coins.valor.ToString());
 
     }
 
