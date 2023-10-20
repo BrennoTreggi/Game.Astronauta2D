@@ -752,7 +752,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HealthBase: {fileID: 356816095}
   myrygibody: {fileID: 356816091}
-  SO_Player: {fileID: 11400000, guid: 0bc366c95c2d08c4c86deac8a0b5ec1d, type: 2}
+  SO_Player: {fileID: 11400000, guid: 9b992992b1b44204483ecf488928ed7c, type: 2}
   Speedcaracter: 0.03
 --- !u!50 &356816091
 Rigidbody2D:
