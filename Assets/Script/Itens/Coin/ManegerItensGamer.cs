@@ -6,9 +6,16 @@ using Script.Ultts.Singleton;
 
 public class ManegerItensGamer : Singleton<ManegerItensGamer>
 {
-    
-    public SOinti coins;
-    public TextMeshProUGUI TextMeshProUGUI;
+    [Header("Foguete")]
+
+    public SO_Float foguete;
+    public TextMeshProUGUI Text_Foguete;
+
+    [Header("Coins")]
+
+    public SO_Inst_Coins coins;
+    public TextMeshProUGUI Text_Coins;
+
 
     private void Start()
     {
@@ -16,11 +23,14 @@ public class ManegerItensGamer : Singleton<ManegerItensGamer>
 
     }
 
-    public void Reset()
+     private void Reset()
     {
+        foguete.value = 0;
         coins.valor = 0;
         UpdateUI();
+       
     }
+
     public void AdsCoin(int amount = 1) 
     {
         coins.valor += amount;
@@ -28,10 +38,23 @@ public class ManegerItensGamer : Singleton<ManegerItensGamer>
 
     }
 
+    public void Adsfoguete(float amout = 1.3f)
+    {
+
+
+        foguete.value += amout;
+        UpdateUI();
+
+    }
+
+
+
+
     private void UpdateUI()
     {
         //TextMeshProUGUI.text = coins.ToString();
-       //UIGameManeger.UpdateTextCoins(coins.valor.ToString());
+       //UIGameManeger.UpdateTextCoins(coins.ToString());
+   
 
     }
 

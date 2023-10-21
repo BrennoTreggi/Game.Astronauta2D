@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu]
-public class SOFLoat :  ScriptableObject
+public class SO_Inst_Coins : ScriptableObject
 {
-    public float value;
+
+    public int valor;
+
 }
