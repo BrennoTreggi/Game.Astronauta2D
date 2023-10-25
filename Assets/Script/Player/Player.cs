@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.SocialPlatforms;
+
 public class Player : MonoBehaviour
 {
     public HealthBase HealthBase;
@@ -16,6 +18,13 @@ public class Player : MonoBehaviour
     private float Speedforce;
     private Animator myAnimator;
 
+    [Header("Jump Collision")]
+    public Collider2D Collider2D;
+    public float distance;
+    public float Spaceditance = .1f;
+    public ParticleSystem JumpEfect;
+    public ParticleSystem coliderefect;
+  
     private void Awake()
     {
        myAnimator = Instantiate(SO_Player.player, transform);
@@ -26,6 +35,29 @@ public class Player : MonoBehaviour
            HealthBase.Onkill += OnPlayer;
             
         }
+
+       if (Collider2D != null)
+        {
+            distance = Collider2D.bounds.extents.y;
+        }
+
+
+    }
+
+
+    private bool Distance()
+    {
+        Debug.DrawRay(transform.position, -Vector2.up, Color.magenta, distance + Spaceditance);
+
+        var layer = gameObject.layer;
+        gameObject.layer = 2;
+
+        var hit2d = Physics2D.Raycast(transform.position, -Vector2.up, distance + Spaceditance);
+
+        gameObject.layer = layer;
+        return  hit2d.collider != null;
+
+       
     }
 
     private void OnPlayer()
@@ -36,6 +68,7 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
+        Distance();
         MyPlayer();
         PlayerJump();
     }
@@ -101,17 +134,28 @@ public class Player : MonoBehaviour
 
     private void PlayerJump()
     { 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && Distance())
         {
             myrygibody.velocity = Vector2.up * SO_Player.ForceJump;
             myrygibody.transform.localScale = Vector2.one;
+            
             DOTween.Kill(myrygibody.transform);
-            DOTween.Kill(myrygibody.transform);
+           
             ScaleJump();
+            PlayJumpEfect();
+
         }
 
     }
+
+    private void PlayJumpEfect()
+    {
+        if (JumpEfect != null) JumpEfect.Play();
+       
+    }
+     
     private void ScaleJump()
+
     {
         myrygibody.transform.DOScaleX(SO_Player.JumpScaleX, SO_Player.jumpduration).SetLoops(1, LoopType.Restart).SetEase(SO_Player.ease);
         myrygibody.transform.DOScaleY(SO_Player.JumpScaleY, SO_Player.jumpduration).SetLoops(2, LoopType.Yoyo).SetEase(SO_Player.ease);

@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e142ff3075b6f2144b78c37ae7e77298, type: 3}
   m_Name: SO_Inst_Coins
   m_EditorClassIdentifier: 
-  valor: 0
+  valor: 2
