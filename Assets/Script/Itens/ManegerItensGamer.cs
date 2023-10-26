@@ -31,14 +31,14 @@ public class ManegerItensGamer : Singleton<ManegerItensGamer>
        
     }
 
-    public void AdsCoin(int amount = 1) 
+    public void AdsCoin(int amount = 50) 
     {
         coins.valor += amount;
         UpdateUI();
 
     }
 
-    public void Adsfoguete(float amout = 1.3f)
+    public void Adsfoguete(int amout = 500)
     {
 
 

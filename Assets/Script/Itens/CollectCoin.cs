@@ -4,13 +4,30 @@ using UnityEngine;
 
 public class CollectCoin : ColectBollBase
 {
+    [SerializeField] private CoinType itens = CoinType.Coin;
+
     protected override void CollectOkay()
     {
         base.CollectOkay();
-        ManegerItensGamer.Instance.AdsCoin();
-        ManegerItensGamer.Instance.Adsfoguete();
+        
+        if (itens == CoinType.Coin)
+        {
+            ManegerItensGamer.Instance.AdsCoin();
+        }
+
+        else if (itens == CoinType.Foguete)
+        {
+            ManegerItensGamer.Instance.Adsfoguete();
+        }
 
 
 
     }
+
+}
+public enum CoinType
+{
+    Coin,
+    Foguete
+
 }
