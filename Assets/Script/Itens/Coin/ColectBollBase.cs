@@ -11,6 +11,10 @@ public class ColectBollBase : MonoBehaviour
 
     private Collider2D colision2D;
     private SpriteRenderer spriteRenderer;
+
+    [Header("Audition")]
+    public AudioSource audioSource;
+
     private void Awake()
     {
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
@@ -49,6 +53,8 @@ public class ColectBollBase : MonoBehaviour
     {
 
     if (particleSystem != null) particleSystem.Play();
+
+    if (audioSource != null) audioSource.Play();
 
 
     }
